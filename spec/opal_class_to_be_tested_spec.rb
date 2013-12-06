@@ -1,4 +1,3 @@
-# require '../app/opal_class_to_be_tested'
 require 'opal_class_to_be_tested'
 
 # nominal test to show opal being tested along side of js,
