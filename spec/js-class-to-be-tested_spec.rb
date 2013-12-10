@@ -39,3 +39,16 @@ describe "Dom Testing" do
   end
 
 end
+
+describe "Async testing" do
+  async "should test async" do
+    puts "starting async"
+    `var foo = 1`
+    `foo`.should == 1
+    %x| setTimeout( function()
+                     { console.log('in timeout');
+                       foo = 2;
+                       #{run_async { `foo`.should == 2} }
+                      }, 1 0 )|
+  end
+end
