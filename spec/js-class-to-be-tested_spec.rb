@@ -49,6 +49,6 @@ describe "Async testing" do
                      { console.log('in timeout');
                        foo = 2;
                        #{run_async { `foo`.should == 2} }
-                      }, 1 0 )|
+                      }, 10 )|
   end
 end
