@@ -2,8 +2,11 @@
 # via opal-require
 require 'js-class-to-be-tested'
 require 'date'
+require 'opal'
+require 'opal-jquery'
 
-describe "Testing Javascript" do
+
+describe "JsClassToBeTested" do
   let(:user) { Native(`new JsClassToBeTested('bill', 'thompson')`)}
 
   it 'should be able to test an attribute' do
@@ -12,6 +15,27 @@ describe "Testing Javascript" do
 
   it 'should be able to test a function' do
     user.yearBornIfThisOld(10).should == Date.today.year - 10
+  end
+
+end
+
+describe "Dom Testing" do
+  it "should see DOM changes" do
+
+    html = <<-HTML
+      <div id="target-div">
+        original text
+      </div>
+    HTML
+
+    div = Element.parse html
+    div.append_to_body
+
+    d = Element.find("#target-div")
+    d.text.should =~ /original text/
+    `document.getElementById('target-div').innerText = 'js replaced text'`
+
+    d.text.should == "js replaced text"
   end
 
 end
